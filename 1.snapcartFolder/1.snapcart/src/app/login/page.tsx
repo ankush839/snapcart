@@ -31,6 +31,7 @@ try {
       console.log(result.error)
       // optionally: setError("Invalid email or password")
     } else {
+       router.refresh() 
       router.push("/")
     }
   } catch (error) {
