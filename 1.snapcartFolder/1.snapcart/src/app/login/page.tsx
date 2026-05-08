@@ -21,15 +21,23 @@ function Login() {
         e.preventDefault()
         setLoading(true)
 try {
-   await signIn("credentials",{
-    email,password
-   }) 
-  
-   setLoading(false)
-} catch (error) {
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    })
+
+    if (result?.error) {
+      console.log(result.error)
+      // optionally: setError("Invalid email or password")
+    } else {
+      router.push("/")
+    }
+  } catch (error) {
     console.log(error)
+  } finally {
     setLoading(false)
-}
+  }
     }
   return (
     <div className='flex flex-col items-center justify-center min-h-screen px-6 py-10 bg-white relative'>
